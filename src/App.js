@@ -1,18 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes, Switch } from 'react-router-dom';
-import { ChakraBaseProvider } from '@chakra-ui/react';
-import Login from './Pages/Login';
+
+import Home from './Pages/Home';
 
 function App() {
   return (
-    <ChakraBaseProvider>
-      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login/>} />
+          <Route path="/" element={<Home/>} />
         </Routes>
-      </BrowserRouter>
-    </ChakraBaseProvider>
   );
 }
 
