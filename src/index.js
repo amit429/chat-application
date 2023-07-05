@@ -8,7 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ChakraProvider>
+  <ChakraProvider toastOptions={{ defaultOptions: { position: 'top' } }}>
     <BrowserRouter>
         <App />
     </BrowserRouter>

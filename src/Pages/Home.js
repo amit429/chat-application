@@ -15,8 +15,10 @@ import {
 import React from "react";
 import Login from "./Login";
 import Signup from "./Signup";
+import { useState , useEffect } from "react";
 
 export default function Home() {
+
   return (
     <>
       <Container maxW="xl" centerContent m={"auto"}>
