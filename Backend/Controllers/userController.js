@@ -61,7 +61,7 @@ const authUser = asyncHandler(async (req, res) => {
             name: userExists.name,
             email: userExists.email,
             profilePic: userExists.profilePic,
-           // token : generateToken(userExists._id)
+            token : token
         });
         
     }
@@ -71,4 +71,26 @@ const authUser = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = {registerUser , authUser}
+//all users with the help of query
+// api/user/allUsers?name=xyz
+const allUsers = asyncHandler(async (req, res) => {
+    const name = req.query.name ? {
+
+        $or: [
+            {name: {
+                $regex: req.query.name,
+                $options: 'i'
+            }},
+
+           { email: {
+                $regex: req.query.name,
+                $options: 'i'
+            }}
+        ]
+    }: {}
+    
+    const users = await User.find(name).find({ _id: { $ne: req.userID } });
+    res.json(users); 
+});
+
+module.exports = {registerUser , authUser , allUsers}
