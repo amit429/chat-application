@@ -72,7 +72,7 @@ export default function Login() {
 
           setTimeout(() => {
             setLoading(false);
-            window.location.href = "/chat";
+            window.location.href = "/chats";
           }, 3000);
         }
       } catch (err) {
@@ -84,7 +84,7 @@ export default function Login() {
   const handleClick = () => setShow(!show);
   return (
     <>
-      <Container maxW="4xl" p={{ base: 5, md: 5 }}>
+      <Container  maxW="4xl" p={{ base: 5, md: 5 }}>
         <Center>
           <Stack spacing={4}>
             <Stack align="center">

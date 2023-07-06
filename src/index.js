@@ -5,14 +5,18 @@ import App from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
+import ChatProvider from "./Context/ChatProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ChakraProvider toastOptions={{ defaultOptions: { position: 'top' } }}>
     <BrowserRouter>
+      <ChatProvider>
         <App />
+      </ChatProvider>
     </BrowserRouter>
   </ChakraProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

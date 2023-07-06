@@ -27,6 +27,13 @@ router.get("/checkLogin" , authenticate , (req,res)=>{
     }
 
 });
+
+//logout user
+router.get("/logout" , (req,res)=>{
+    res.clearCookie('token' , {path : '/'});
+    res.status(200).send("User logged out");
+});
+
 // initial route
 router.get('/', (req, res) => {
     res.send('Hello World');

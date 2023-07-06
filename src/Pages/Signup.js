@@ -150,7 +150,7 @@ export default function Signup() {
             setprofilePic("");
           // put delay to show toast
           setTimeout(() => {
-            window.location.href = "/login";
+            window.location.href = "/";
           }, 3000);
         }
       } catch (err) {
