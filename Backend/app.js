@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
 const cookieParser = require('cookie-parser');
 const chatRoutes = require('./routes/chatRoutes');
+const messageRoutes = require('./routes/messageRoutes');
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,7 @@ app.use(cors());
 app.use(cookieParser());
 app.use('/api/user/' , userRoutes);
 app.use('/api/chat/' , chatRoutes);
+app.use('/api/message/' , messageRoutes);
 
 
 app.listen(port, () => {
