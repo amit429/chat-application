@@ -57,7 +57,7 @@ export default function SideDrawer() {
 
     try {
       setLoading(true);
-      const res = await fetch(`/api/user/allUsers?name=${search}`, {
+      const res = await fetch(`https://chat-application-u14e.onrender.com/api/user/allUsers?name=${search}`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -85,7 +85,7 @@ export default function SideDrawer() {
   // write the logout logic here
     const logout = async () => {
 
-        const res = await fetch("/api/user/logout", {
+        const res = await fetch("https://chat-application-u14e.onrender.com/api/user/logout", {
             method: "GET",
             headers: {
                 Accept: "application/json",
@@ -118,7 +118,7 @@ export default function SideDrawer() {
 
         setLoadingChat(true);
         // using the fetch api to access the chat
-        const res = await fetch(`/api/chat/allChats`, {
+        const res = await fetch(`https://chat-application-u14e.onrender.com/api/chat/allChats`, {
             method: "POST",
             headers: {
                 Accept: "application/json",

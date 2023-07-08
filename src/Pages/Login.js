@@ -34,7 +34,7 @@ export default function Login() {
       return;
     } else {
       try {
-        const res = await fetch("/api/user/login", {
+        const res = await fetch("https://chat-application-u14e.onrender.com/api/user/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

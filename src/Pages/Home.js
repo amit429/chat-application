@@ -24,13 +24,13 @@ export default function Home() {
   
   const checkLogin = async () => {
     try {
-      const res = await fetch("/api/user/checkLogin", {
+      const res = await fetch("https://chat-application-u14e.onrender.com/api/user/checkLogin", {
         method: "GET",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        credentials: "include",
+        //credentials: "include",
       });
 
       const data = await res.json();
