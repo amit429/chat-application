@@ -43,7 +43,7 @@ userSchema.pre('save', async function(next){
 
 userSchema.methods.generateToken = async function(){
     try{
-        let token = jwt.sign({_id: this._id}, process.env.JWT_SECRET);
+        let token = jwt.sign({_id: this._id}, "amitpile");
         this.tokens = this.tokens.concat({token: token});
         await this.save();
         return token;

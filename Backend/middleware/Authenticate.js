@@ -7,7 +7,8 @@ const Authenticate = async (req,res,next) => {
     try{
         
         const token = req.cookies.token;
-        const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
+        //const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
+        const verifyToken = jwt.verify(token, "amitpile");
         const rootUser = await User.findOne({_id:verifyToken._id, "tokens.token":token}).select("-password");
 
         if(!rootUser){
