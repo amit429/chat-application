@@ -53,7 +53,7 @@ export default function SingleChat() {
         headers: {
           Accept: "application/json",
         },
-        credentials: "include",
+        //credentials: "include",
       });
       const data = await res.json();
       console.log(messages)
@@ -86,7 +86,7 @@ export default function SingleChat() {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          credentials: "include",
+          //credentials: "include",
           body: JSON.stringify({
             chatId: selectedChat._id,
             content: newMessage,

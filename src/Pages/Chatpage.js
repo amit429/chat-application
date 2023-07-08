@@ -22,7 +22,7 @@ export default function Chatpage() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        credentials: "include",
+        //credentials: "include",
       });
 
       //console.log(data);

@@ -63,7 +63,7 @@ export default function SideDrawer() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        credentials: "include",
+        //credentials: "include",
       });
 
       const data = await res.json();
@@ -91,7 +91,7 @@ export default function SideDrawer() {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
-            credentials: "include",
+            //credentials: "include",
         });
 
         if(res.status === 200){
