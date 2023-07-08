@@ -28,6 +28,16 @@ app.use('/api/user/' , userRoutes);
 app.use('/api/chat/' , chatRoutes);
 app.use('/api/message/' , messageRoutes);
 
+// Add Access Control Allow Origin headers
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://chat-application-react-talk.netlify.app/");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
+
 // ----------------------Deployment----------------------
 
 // const __dirname1 = path.resolve();
