@@ -11,6 +11,13 @@ import ProfileModal from "../Others/ProfileModal";
 import { ChatState } from "../../Context/ChatProvider";
 import { getSender, getSenderFull } from "./ChatLogic";
 import ScrollableChat from "./ScrollableChat";
+import animationData from "../Others/Typing.json"
+import Lottie from "lottie-react";
+import io from "socket.io-client";
+
+const ENDPOINT = "http://localhost:5000";
+
+var socket, selectedChatCompare;
 
 export default function SingleChat() {
   const [messages, setMessages] = useState([]);
@@ -20,6 +27,15 @@ export default function SingleChat() {
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
   const toast = useToast();
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   const { selectedChat, setSelectedChat, user } = ChatState();
 
@@ -41,6 +57,8 @@ export default function SingleChat() {
       console.log(messages)
       setMessages(data);
       setLoading(false);
+
+      socket.emit('join room', selectedChat._id);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -57,6 +75,7 @@ export default function SingleChat() {
 
   const sendMessage = async (e) => {
     if (e.key === "Enter" && newMessage) {
+      socket.emit('stop typing', selectedChat._id);
       try {
 
         const res = await fetch("/api/message/", {
@@ -73,6 +92,7 @@ export default function SingleChat() {
         });
         setNewMessage("");
         const data = await res.json();
+        socket.emit('new message', data);
         setMessages([...messages, data]);
         console.log(data);
       } catch (error) {
@@ -90,11 +110,59 @@ export default function SingleChat() {
   const typingHandler = (e) => {
 
     setNewMessage(e.target.value);
+    if(!socketConnected) return;
+
+    if(!typing){
+      setTyping(true);
+      socket.emit('typing', selectedChat._id);
+    }
+
+    let lastTypingTime = (new Date()).getTime();
+    var timerLength = 3000;
+
+    setTimeout(() => {
+
+      var timeNow = (new Date()).getTime();
+      var timeDiff = timeNow - lastTypingTime;
+
+      if(timeDiff >= timerLength && typing){
+        socket.emit('stop typing', selectedChat._id);
+        setTyping(false);
+      }
+    }, timerLength);
   }
 
   useEffect(() => {
+    socket = io(ENDPOINT);
+    socket.emit('setup', user);
+    socket.on('connected', () => {
+      setSocketConnected(true);
+    });
+    socket.on('typing', () => {
+        setIsTyping(true);
+    });
+    socket.on('stop typing', () => {
+      setIsTyping(false);
+    });
+  }, []);
+
+  useEffect(() => {
     fetchMessages();
+    selectedChatCompare = selectedChat;
   }, [selectedChat]);
+
+  useEffect(() => {
+    socket.on('message received', (newMessage) => {
+      if(!selectedChatCompare || selectedChatCompare._id !== newMessage.chat._id){
+        //give notification
+      }
+      else{
+        setMessages([...messages, newMessage]);
+      }
+    });
+  });
+
+
 
   return (
     <>
@@ -172,18 +240,28 @@ export default function SingleChat() {
               isRequired
               mt={3}
             >
-              {/* {istyping ? (
+              {istyping ? (
                 <div>
                   <Lottie
-                    options={defaultOptions}
+                    animationData={animationData}
+                    loop={true}
+                    autoPlay={true}
+                    rendererSettings={
+                      {preserveAspectRatio: "xMidYMid slice"}
+                    }
+                    style={{
+                      width: 50,
+                      marginBottom: 15,
+                      marginLeft: 0,
+                    }}
                     // height={50}
-                    width={70}
-                    style={{ marginBottom: 15, marginLeft: 0 }}
+                    // width={20}
+                    // style={{ marginBottom: 15, marginLeft: 0 }}
                   />
                 </div>
               ) : (
                 <></>
-              )} */}
+              )}
               <Input
                 variant="filled"
                 bg="#E0E0E0"
