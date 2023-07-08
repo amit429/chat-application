@@ -54,7 +54,8 @@ const server = app.listen(port, () => {
 const io = require('socket.io')(server, {
     pingTimeout: 60000,
     cors: {
-        origin: "http://localhost:3000",
+        //origin: "http://localhost:3000",
+        origin: "https://chat-application-react-talk.netlify.app/"
     }
 });
 
@@ -87,7 +88,7 @@ io.on('connection', (socket) => {
 
         chat.users.forEach(user => {
             //send the live msg to all the users in the room excoet the sender
-            if(user._id == newMessage.sender._id) return;
+            if(user._id === newMessage.sender._id) return;
             socket.in(user._id).emit('message received' , newMessage);
         });
     });

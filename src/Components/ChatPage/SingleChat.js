@@ -17,6 +17,8 @@ import io from "socket.io-client";
 
 const ENDPOINT = "http://localhost:5000";
 
+//const ENDPOINT = "https://chat-application-backend.proamit.repl.co"
+
 var socket, selectedChatCompare;
 
 export default function SingleChat() {
