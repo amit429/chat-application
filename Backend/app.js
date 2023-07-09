@@ -22,7 +22,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(cors());
+app.use("*" ,cors(
+   { origin : true,
+    credentials : true}
+));
 app.use(cookieParser(
     {
         sameSite: 'none',
@@ -34,7 +37,7 @@ app.use('/api/message/' , messageRoutes);
 
 // Add Access Control Allow Origin headers
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://chat-application-react-talk.netlify.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://chat-application-frontend.onrender.com");
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept",

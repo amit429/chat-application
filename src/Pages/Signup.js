@@ -116,11 +116,12 @@ export default function Signup() {
       );
     } else {
       try {
-        const res = await fetch("/api/user/register", {
+        const res = await fetch("https://chat-application-u14e.onrender.com/api/user/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          withCredentials: true,
           body: JSON.stringify({
             name,
             email,

@@ -12,13 +12,14 @@ const ChatProvider = ({ children }) => {
   //check if user is logged in from the checkLogin route
   const checkLogin = async () => {
     try {
-      const res = await fetch("/api/user/checkLogin", {
+      const res = await fetch("https://chat-application-u14e.onrender.com/api/user/checkLogin", {
         method: "GET",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         //credentials: "include",
+        withCredentials: true,
       });
 
       const data = await res.json();
