@@ -22,7 +22,7 @@ export default function MyChats() {
 
     //fetch using the fetch function
     try{
-      const res = await fetch('https://chat-application-u14e.onrender.com/api/chat/allChats',{
+      const res = await fetch('/api/chat/allChats',{
         method: 'GET',
         headers: {
           Accept: 'application/json',

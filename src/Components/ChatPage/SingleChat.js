@@ -48,7 +48,7 @@ export default function SingleChat() {
     if (!selectedChat) return;
     try {
       setLoading(true);
-      const res = await fetch(`https://chat-application-u14e.onrender.com/api/message/${selectedChat._id}`, {
+      const res = await fetch(`/api/message/${selectedChat._id}`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -80,7 +80,7 @@ export default function SingleChat() {
       socket.emit('stop typing', selectedChat._id);
       try {
 
-        const res = await fetch("https://chat-application-u14e.onrender.com/api/message/", {
+        const res = await fetch("/api/message/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

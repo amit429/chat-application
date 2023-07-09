@@ -16,7 +16,7 @@ export default function Chatpage() {
 
   const checkLogin = async () => {
     try {
-      const res = await fetch("https://chat-application-u14e.onrender.com/api/user/checkLogin", {
+      const res = await fetch("/api/user/checkLogin", {
         method: "GET",
         headers: {
           Accept: "application/json",

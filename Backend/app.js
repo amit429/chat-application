@@ -23,7 +23,11 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(cors());
-app.use(cookieParser());
+app.use(cookieParser(
+    {
+        sameSite: 'none',
+    }
+));
 app.use('/api/user/' , userRoutes);
 app.use('/api/chat/' , chatRoutes);
 app.use('/api/message/' , messageRoutes);
